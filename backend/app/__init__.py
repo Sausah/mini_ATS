@@ -19,6 +19,23 @@ def create_app(config_name='default'):
         }
     })
 
+    # Auto-initialize database tables and demo admin if not present
+    with app.app_context():
+        try:
+            db.create_all()
+            from app.models import User
+            if User.query.filter_by(email='admin@miniats.com').first() is None:
+                admin_user = User(
+                    name='Recruiter Admin',
+                    email='admin@miniats.com',
+                    role='admin'
+                )
+                admin_user.set_password('admin123')
+                db.session.add(admin_user)
+                db.session.commit()
+        except Exception:
+            pass
+
     # Register blueprints
     from app.routes.candidates import candidates_bp
     from app.routes.jobs import jobs_bp
