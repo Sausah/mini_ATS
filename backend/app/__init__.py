@@ -51,7 +51,15 @@ def create_app(config_name='default'):
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(interviews_bp, url_prefix='/api/interviews')
 
-    # Health check
+    # Root & Health check
+    @app.route('/')
+    def index():
+        return {
+            'status': 'ok',
+            'message': 'Mini ATS Backend API is running',
+            'health': '/api/health'
+        }, 200
+
     @app.route('/api/health')
     def health():
         return {'status': 'ok', 'message': 'Mini ATS API is running'}, 200
