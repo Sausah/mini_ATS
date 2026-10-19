@@ -3,7 +3,14 @@
   "services": {
     "frontend": {
       "root": "frontend",
-      "framework": "vite"
+      "buildCommand": "npm run build",
+      "outputDirectory": "dist",
+      "rewrites": [
+        {
+          "source": "/(.*)",
+          "destination": "/index.html"
+        }
+      ]
     },
     "backend": {
       "root": "backend",
