@@ -1,8 +1,7 @@
 {
+  "name": "mini-ats",
+  "private": true,
   "scripts": {
-    "build": "npm --prefix frontend run build"
-  },
-  "devDependencies": {
-    "vite": "^8.3.4"
+    "build": "npm --prefix frontend install && npm --prefix frontend run build"
   }
 }
